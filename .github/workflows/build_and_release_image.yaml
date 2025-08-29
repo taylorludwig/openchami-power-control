@@ -1,5 +1,5 @@
-name: Build and Maybe Release Image
-run-name: ${{ startsWith(github.ref, 'refs/tags/v') && 'Build and Release Image' || 'Build Image' }}
+name: GoReleaser
+run-name: GoReleaser ${{ startsWith(github.ref, 'refs/tags/v') && 'Release' || 'Snapshot' }}
 
 on:
   workflow_dispatch:
@@ -8,11 +8,11 @@ on:
     tags:
       - v*
 
-permissions: write-all # Necessary for the generate-build-provenance action with containers
-
 jobs:
-  release:
-    uses: OpenCHAMI/github-actions/.github/workflows/go-build-release.yml@v3.2
+  goreleaser:
+    name: GoReleaser ${{ startsWith(github.ref, 'refs/tags/v') && 'Release' || 'Snapshot' }}
+    uses: taylorludwig/openchami-github-actions/.github/workflows/go-build-release.yml@feature/go-build-release-tweaks
+    # uses: OpenCHAMI/github-actions/.github/workflows/go-build-release.yml@v3.2
     with:
       fetch-depth: 1
       pre-build-commands: |
