@@ -15,6 +15,7 @@ jobs:
     uses: OpenCHAMI/github-actions/.github/workflows/go-build-release.yml@9b25637
     with:
       fetch-depth: 1
+      snapshot: false
       pre-build-commands: |
         sudo apt-get update
         sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
