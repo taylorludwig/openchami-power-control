@@ -1,6 +1,8 @@
 name: GoReleaser
 run-name: GoReleaser ${{ startsWith(github.ref, 'refs/tags/v') && 'Release' || 'Snapshot' }}
 
+permissions: write-all # Necessary for the generate-build-provenance action with containers
+
 on:
   workflow_dispatch:
   pull_request:
